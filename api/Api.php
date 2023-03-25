@@ -26,7 +26,13 @@ class API
 			{
 				$data[] = $row;
 			}
-			return $data;
+			if(!empty($data)){
+				
+				return $data;
+			}
+			else{
+				echo "No records found";
+			}
 		}
 	}
 
