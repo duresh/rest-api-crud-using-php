@@ -36,17 +36,19 @@ class API
 	{
 		if(isset($_POST["first_name"]))
 		{
-			$form_data = array(
-				':first_name'		=>	$_POST["first_name"],
-				':last_name'		=>	$_POST["last_name"]
-			);
+			// $form_data = array(
+			// 	':first_name'		=>	$_POST["first_name"],
+			// 	':last_name'		=>	$_POST["last_name"]
+			// );
 			$query = "
 			INSERT INTO tbl_sample 
 			(first_name, last_name) VALUES 
 			(:first_name, :last_name)
 			";
 			$statement = $this->connect->prepare($query);
-			if($statement->execute($form_data))
+			$statement->bindParam(':first_name', $_POST["first_name"]);
+            $statement->bindParam(':last_name', $_POST["last_name"]);
+			if($statement->execute())
 			{
 				$data[] = array(
 					'success'	=>	'1'
